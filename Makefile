@@ -14,5 +14,5 @@ push:
 	$(DOCKER) push $(DOCKER_IMAGE_NAME)
 
 test:
-	$(DOCKER) run --rm $(DOCKER_IMAGE_NAME) /bin/echo "Success."
+	$(DOCKER) run --rm $(DOCKER_IMAGE_NAME) --version
 
