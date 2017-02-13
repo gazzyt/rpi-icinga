@@ -16,3 +16,6 @@ push:
 test:
 	$(DOCKER) run --rm $(DOCKER_IMAGE_NAME) --version
 
+clean:
+	$(DOCKER) images -qf dangling=true | xargs --no-run-if-empty docker rmi
+	$(DOCKER) volume prune -f
