@@ -14,7 +14,7 @@ RUN apt-get -qq update \
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose volumes
-VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log"]
+VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga"]
 
 # Expose ports
 EXPOSE 80
