@@ -21,3 +21,4 @@ EXPOSE 80
 
 # Start services via Supervisor
 ENTRYPOINT ["/usr/bin/supervisord"]
+CMD ["-c","/etc/supervisor/conf.d/supervisord.conf"]
