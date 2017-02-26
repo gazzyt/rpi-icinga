@@ -39,3 +39,6 @@ Icinga does not set any default password for the admin user. Run the following c
 ```
 htpasswd -c etc/htpasswd.users icingaadmin
 ```
+
+## Copyright
+Copyright 2017 Achim Christ
