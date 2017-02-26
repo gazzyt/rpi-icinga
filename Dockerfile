@@ -7,6 +7,8 @@ RUN apt-get -qq update \
 && apt-get -qqy install \
   apache2 \
   icinga \
+  icinga-doc \
+  nagios-nrpe-plugin \
   supervisor \
 && rm -rf /var/lib/apt/lists/*
 
