@@ -9,6 +9,7 @@ RUN apt-get -qq update \
   icinga \
   icinga-doc \
   nagios-nrpe-plugin \
+  patch \
   pnp4nagios \
   supervisor \
 && rm -rf /var/lib/apt/lists/*
@@ -21,10 +22,14 @@ RUN ln -s ../../pnp4nagios/apache.conf /etc/apache2/conf-available/pnp4nagios.co
 # Add Supervisor configuration
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Add PNP4Nagios configuration
-COPY apache.conf /etc/pnp4nagios/apache.conf
-COPY config.php /etc/pnp4nagios/config.php
+# Patch PNP4Nagios
+COPY index.php.patch /tmp/index.php.patch
+COPY apache.conf.patch /tmp/apache.conf.patch
+COPY config.php.patch /tmp/config.php.patch
 COPY status-header.ssi /usr/share/icinga/htdocs/ssi/status-header.ssi
+RUN /usr/bin/patch /usr/share/pnp4nagios/html/index.php /tmp/index.php.patch \
+&& /usr/bin/patch /etc/pnp4nagios/apache.conf /tmp/apache.conf.patch \
+&& /usr/bin/patch /etc/pnp4nagios/config.php /tmp/config.php.patch
 
 # Expose volumes
 VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga"]

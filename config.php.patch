@@ -1,0 +1,11 @@
+--- config.php.orig	2012-11-24 16:03:22.000000000 +0100
++++ config.php	2017-03-05 17:18:33.715375102 +0100
+@@ -89,7 +89,7 @@
+ #
+ # Link back to Nagios or Thruk ( www.thruk.org ) 
+ #
+-$conf['nagios_base'] = "/cgi-bin/nagios3";
++$conf['nagios_base'] = "/cgi-bin/icinga";
+ 
+ #
+ # Link back to check_mk´s multisite ( http://mathias-kettner.de/checkmk_multisite.html )
