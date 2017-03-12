@@ -32,7 +32,7 @@ RUN /usr/bin/patch /usr/share/pnp4nagios/html/index.php /tmp/index.php.patch \
 && /usr/bin/patch /etc/pnp4nagios/config.php /tmp/config.php.patch
 
 # Expose volumes
-VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga"]
+VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga", "/var/lib/pnp4nagios/perfdata"]
 
 # Expose ports
 EXPOSE 80
