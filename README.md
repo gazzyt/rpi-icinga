@@ -29,6 +29,8 @@ Run with docker-compose:
         - cache:/var/cache/icinga
         - ./log:/var/log/icinga
         - perfdata:/var/lib/pnp4nagios/perfdata
+      restart: always
+
   volumes:
     cache:
     perfdata:
