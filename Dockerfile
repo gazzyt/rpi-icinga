@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian:jessie
+FROM resin/rpi-raspbian:stretch
 MAINTAINER Achim Christ
 
 # Install prerequisites
@@ -9,27 +9,16 @@ RUN apt-get -qq update \
   icinga \
   icinga-doc \
   nagios-nrpe-plugin \
-  patch \
   pnp4nagios \
+  pnp4nagios-web-config-icinga \
   supervisor \
 && rm -rf /var/lib/apt/lists/*
-
-# Configure Apache
-RUN ln -s ../../pnp4nagios/apache.conf /etc/apache2/conf-available/pnp4nagios.conf \
-&& /usr/sbin/a2enconf pnp4nagios \
-&& /usr/sbin/a2enmod rewrite
 
 # Add Supervisor configuration
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Patch PNP4Nagios
-COPY index.php.patch /tmp/index.php.patch
-COPY apache.conf.patch /tmp/apache.conf.patch
-COPY config.php.patch /tmp/config.php.patch
+# Enable popups
 COPY status-header.ssi /usr/share/icinga/htdocs/ssi/status-header.ssi
-RUN /usr/bin/patch /usr/share/pnp4nagios/html/index.php /tmp/index.php.patch \
-&& /usr/bin/patch /etc/pnp4nagios/apache.conf /tmp/apache.conf.patch \
-&& /usr/bin/patch /etc/pnp4nagios/config.php /tmp/config.php.patch
 
 # Expose volumes
 VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga", "/var/lib/pnp4nagios/perfdata"]

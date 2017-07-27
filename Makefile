@@ -1,7 +1,7 @@
 DOCKER=/bin/docker
 DOCKER_IMAGE_NAME=acch/rpi-icinga
 DOCKER_BASE_NAME=resin/rpi-raspbian
-DOCKER_BASE_VERSION=jessie
+DOCKER_BASE_VERSION=stretch
 
 default: build
 
