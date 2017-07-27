@@ -19,11 +19,14 @@ Run manually with plain docker:
 Run with docker-compose:
 
 ```
+# docker-compose.yml
+  version: '3'
+
   services:
-    icinga:
+    app:
       image: acch/rpi-icinga
       ports:
-        - "8000:80"
+        - 80:80
       volumes:
         - ./etc:/etc/icinga
         - cache:/var/cache/icinga
