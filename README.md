@@ -1,4 +1,4 @@
-# rpi-icinga
+# rpi-icingA
 
 Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image. Includes [PNP4Nagios](https://docs.pnp4nagios.org/) to allow for performance data collection.
 
@@ -101,4 +101,4 @@ You can now simply use these templates for hosts and services in order to integr
 
 ## Copyright
 
-Copyright 2017 Achim Christ
+Copyright Achim Christ
