@@ -59,12 +59,30 @@ Icinga does not set any default password for the admin user. Run the following c
 # htpasswd -c etc/htpasswd.users icingaadmin
 ```
 
-### Performance Data Collection
+### Timezone
 
-Refer to the PNP4Nagios [documentation](https://docs.pnp4nagios.org/pnp-0.6/config#bulk_mode_with_npcd_and_npcdmod) for details. Edit the following settings in `icinga.conf` to enable performance data collection:
+Modify the following files to set your local timezone:
 
 ```
-etc/icinga.conf:
+etc/icinga.cfg:
+  ...
+  use_timezone=Europe/Berlin
+  ...
+
+etc/apache2.conf:
+  <DirectoryMatch "^(?:/usr/share/icinga/htdocs|/usr/lib/cgi-bin/icinga|/etc/icinga/stylesheets)/">
+    ...
+    SetEnv TZ "Europe/Berlin"
+  </DirectoryMatch>
+
+```
+
+### Performance Data Collection
+
+Refer to the PNP4Nagios [documentation](https://docs.pnp4nagios.org/pnp-0.6/config#bulk_mode_with_npcd_and_npcdmod) for details. Edit the following settings in `icinga.cfg` to enable performance data collection:
+
+```
+etc/icinga.cfg:
   ...
   process_performance_data=1
   ...
