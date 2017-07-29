@@ -86,8 +86,18 @@ etc/icinga.cfg:
   ...
   process_performance_data=1
   ...
-  broker_module=/usr/lib/pnp4nagios/npcdmod.o config_file=/etc/pnp4nagios/npcd.cfg
-  ...
+```
+
+Define the npcd_mod event broker module by adding the following file to `etc/modules/`:
+
+```
+etc/modules/npcd_mod.cfg:
+  define module {
+    module_name  npcd_mod
+    path         /usr/lib/pnp4nagios/npcdmod.o
+    module_type  neb
+    args         config_file=/etc/pnp4nagios/npcd.cfg
+    }
 ```
 
 Furthermore, define the following templates in your Icinga configuration (details in the [documentation](https://docs.pnp4nagios.org/pnp-0.6/webfe#popups)):
@@ -97,13 +107,13 @@ Furthermore, define the following templates in your Icinga configuration (detail
     name       host-pnp
     action_url /pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=_HOST_' class='tips' rel='/pnp4nagios/index.php/popup?host=$HOSTNAME$&srv=_HOST_
     register   0
-  }
+    }
  
   define service {
     name       srv-pnp
     action_url /pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$' class='tips' rel='/pnp4nagios/index.php/popup?host=$HOSTNAME$&srv=$SERVICEDESC$
     register   0
-  }
+    }
 ```
 
 You can now simply use these templates for hosts and services in order to integrate performance popups into the web view:
@@ -112,12 +122,12 @@ You can now simply use these templates for hosts and services in order to integr
   define host{
     use        host-pnp
     ...
-  }
+    }
 
   define service{
     use        srv-pnp
     ...
-  }
+    }
 ```
 
 ## Copyright
