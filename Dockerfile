@@ -20,6 +20,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Enable popups
 COPY status-header.ssi /usr/share/icinga/htdocs/ssi/status-header.ssi
 
+# Link timezone configuration
+RUN ln -s /etc/icinga/timezone.ini /etc/php5/apache2/conf.d/
+
 # Expose volumes
 VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga", "/var/lib/pnp4nagios/perfdata"]
 

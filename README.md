@@ -75,6 +75,12 @@ etc/apache2.conf:
     SetEnv TZ "Europe/Berlin"
   </DirectoryMatch>
 
+etc/timezone.ini:
+  [Date]
+  ; Defines the default timezone used by the date functions
+  ; http://php.net/date.timezone
+  date.timezone = "Europe/Berlin"
+
 ```
 
 ### Performance Data Collection
