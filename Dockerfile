@@ -28,8 +28,10 @@ COPY check_users.php.patch /tmp/check_users.php.patch
 RUN /usr/bin/patch /usr/share/pnp4nagios/html/templates.dist/default.php /tmp/default.php.patch \
 && /usr/bin/patch /usr/share/pnp4nagios/html/templates.dist/check_users.php /tmp/check_users.php.patch
 
-# Link timezone configuration
-RUN ln -s /etc/icinga/timezone.ini /etc/php5/apache2/conf.d/
+# Timezone configuration
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+&& echo $TZ > /etc/timezone
 
 # Expose volumes
 VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga", "/var/lib/pnp4nagios/perfdata"]
