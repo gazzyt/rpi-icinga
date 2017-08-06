@@ -16,6 +16,9 @@ RUN apt-get -qq update \
   supervisor \
 && rm -rf /var/lib/apt/lists/*
 
+# Add Rasperry-Pi logos
+COPY raspberry/ /usr/share/icinga/htdocs/images/logos/raspberry/
+
 # Add Supervisor configuration
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
