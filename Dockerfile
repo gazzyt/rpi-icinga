@@ -32,7 +32,8 @@ RUN /usr/bin/patch /usr/share/pnp4nagios/html/templates.dist/default.php /tmp/de
 && /usr/bin/patch /usr/share/pnp4nagios/html/templates.dist/check_users.php /tmp/check_users.php.patch
 
 # Timezone configuration
-ENV TZ=Europe/Berlin
+ARG TZ=Europe/Berlin
+ENV TZ=${TZ}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
 && echo $TZ > /etc/timezone
 
