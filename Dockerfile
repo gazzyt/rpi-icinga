@@ -31,6 +31,10 @@ COPY check_users.php.patch /tmp/check_users.php.patch
 RUN /usr/bin/patch /usr/share/pnp4nagios/html/templates.dist/default.php /tmp/default.php.patch \
 && /usr/bin/patch /usr/share/pnp4nagios/html/templates.dist/check_users.php /tmp/check_users.php.patch
 
+# SSMTP configuration
+RUN mv /etc/ssmtp/ssmtp.conf /etc/icinga/ \
+&& ln -snf /etc/icinga/ssmtp.conf /etc/ssmtp/
+
 # Timezone configuration
 ARG TZ=Europe/Berlin
 ENV TZ=${TZ}
