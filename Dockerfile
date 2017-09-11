@@ -40,6 +40,9 @@ RUN mv /etc/ssmtp/ssmtp.conf /etc/icinga/ \
 && chmod 640 /etc/icinga/ssmtp.conf \
 && chmod g+s /usr/sbin/ssmtp
 
+# Fix external commands
+RUN chmod 2770 /var/lib/icinga/rw
+
 # Timezone configuration
 ARG TZ=Europe/Berlin
 ENV TZ=${TZ}
