@@ -1,6 +1,6 @@
-# rpi-icingA
+# rpi-icing
 
-Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image. Includes [PNP4Nagios](https://docs.pnp4nagios.org/) to allow for performance data collection.
+Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image. Includes [PNP4Nagios](https://docs.pnp4nagios.org/) to allow for performance data collection, and [SSMTP](https://linux.die.net/man/8/ssmtp) for Email notifications.
 
 ## Usage
 
@@ -8,7 +8,7 @@ Run manually with plain docker:
 
 ```
 # docker run --rm \
-  -p 8000:80 \
+  -p 80:80 \
   -v $(pwd)/etc:/etc/icinga \
   -v cache:/var/cache/icinga \
   -v $(pwd)/log:/var/log/icinga \
@@ -25,19 +25,21 @@ Run with docker-compose:
   services:
     app:
       image: acch/rpi-icinga
+      container_name: icinga
       ports:
-        - 80:80
+        - "80:80"
       volumes:
-        - ./etc:/etc/icinga
         - cache:/var/cache/icinga
-        - ./log:/var/log/icinga
         - perfdata:/var/lib/pnp4nagios/perfdata
+        - ./etc:/etc/icinga
+        - ./log:/var/log/icinga
       restart: always
 
   volumes:
     cache:
+      driver: local
     perfdata:
-
+      driver: local
 ```
 
 ## Volumes
@@ -57,30 +59,6 @@ Icinga does not set any default password for the admin user. Run the following c
 
 ```
 # htpasswd -c etc/htpasswd.users icingaadmin
-```
-
-### Timezone
-
-Modify the following files to set your local timezone:
-
-```
-etc/icinga.cfg:
-  ...
-  use_timezone=Europe/Berlin
-  ...
-
-etc/apache2.conf:
-  <DirectoryMatch "^(?:/usr/share/icinga/htdocs|/usr/lib/cgi-bin/icinga|/etc/icinga/stylesheets)/">
-    ...
-    SetEnv TZ "Europe/Berlin"
-  </DirectoryMatch>
-
-etc/timezone.ini:
-  [Date]
-  ; Defines the default timezone used by the date functions
-  ; http://php.net/date.timezone
-  date.timezone = "Europe/Berlin"
-
 ```
 
 ### Performance Data Collection
@@ -125,12 +103,12 @@ Furthermore, define the following templates in your Icinga configuration (detail
 You can now simply use these templates for hosts and services in order to integrate performance popups into the web view:
 
 ```
-  define host{
+  define host {
     use        host-pnp
     ...
     }
 
-  define service{
+  define service {
     use        srv-pnp
     ...
     }
