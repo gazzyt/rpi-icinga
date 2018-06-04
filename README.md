@@ -1,4 +1,4 @@
-# rpi-icing
+# rpi-icinga
 
 Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image. Includes [SSMTP](https://linux.die.net/man/8/ssmtp) for Email notifications.
 
@@ -60,4 +60,4 @@ Icinga does not set any default password for the admin user. Run the following c
 
 ## Copyright
 
-Copyright Achim Christ
+Copyright 2017 Achim Christ, released under the [MIT license](LICENSE)
