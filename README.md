@@ -1,6 +1,6 @@
 # rpi-icinga
 
-![GitHub issues](https://img.shields.io/github/issues/acch/rpi-icinga.svg)![GitHub stars](https://img.shields.io/github/stars/acch/rpi-icinga.svg?style=plastic&label=Stars)![Docker Pulls](https://img.shields.io/docker/pulls/acch/rpi-icinga.svg)![license](https://img.shields.io/github/license/acch/rpi-icinga.svg)
+[![GitHub Issues](https://img.shields.io/github/issues/acch/rpi-icinga.svg)](https://github.com/acch/rpi-icinga/issues) [![GitHub Stars](https://img.shields.io/github/stars/acch/rpi-icinga.svg?label=GitHub%20%E2%98%85)](https://github.com/acch/rpi-icinga/) [![Docker Pulls](https://img.shields.io/docker/pulls/acch/rpi-icinga.svg)](https://hub.docker.com/r/acch/rpi-icinga/) [![License](https://img.shields.io/github/license/acch/rpi-icinga.svg)](LICENSE)
 
 Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image. Includes [SSMTP](https://linux.die.net/man/8/ssmtp) for Email notifications.
 
