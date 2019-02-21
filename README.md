@@ -14,6 +14,7 @@ Run manually with plain docker:
   -v $(pwd)/etc:/etc/icinga \
   -v cache:/var/cache/icinga \
   -v $(pwd)/log:/var/log/icinga \
+  --name icinga
   acch/rpi-icinga
 ```
 
@@ -38,8 +39,6 @@ Run with docker-compose:
   volumes:
     cache:
       driver: local
-    perfdata:
-      driver: local
 ```
 
 ## Volumes
@@ -57,7 +56,7 @@ This image exposes the following volumes:
 Icinga does not set any default password for the admin user. Run the following command to define a password for the admin user:
 
 ```
-# htpasswd -c etc/htpasswd.users icingaadmin
+# docker exec -it icinga htpasswd -c /etc/icinga/htpasswd.users icingaadmin
 ```
 
 ## Copyright
