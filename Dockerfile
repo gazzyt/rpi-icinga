@@ -38,7 +38,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
 && echo $TZ > /etc/timezone
 
 # Expose volumes
-VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log/icinga"]
+VOLUME ["/etc/icinga", "/var/cache/icinga", "/var/log"]
 
 # Expose ports
 EXPOSE 80

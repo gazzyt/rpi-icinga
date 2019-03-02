@@ -13,7 +13,7 @@ Run manually with plain docker:
   -p 80:80 \
   -v $(pwd)/etc:/etc/icinga \
   -v cache:/var/cache/icinga \
-  -v $(pwd)/log:/var/log/icinga \
+  -v $(pwd)/log:/var/log \
   --name icinga
   acch/rpi-icinga
 ```
@@ -33,7 +33,7 @@ Run with docker-compose:
       volumes:
         - cache:/var/cache/icinga
         - ./etc:/etc/icinga
-        - ./log:/var/log/icinga
+        - ./log:/var/log
       restart: always
 
   volumes:
@@ -48,7 +48,7 @@ This image exposes the following volumes:
 ```
 /etc/icinga                   Icinga configuration files
 /var/cache/icinga             Icinga state retention and cache files
-/var/log/icinga               Icinga log files
+/var/log                      Icinga & Apache log files
 ```
 
 ## Installation
