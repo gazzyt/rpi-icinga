@@ -1,21 +1,17 @@
-DOCKER=/bin/docker
-DOCKER_IMAGE_NAME=acch/rpi-icinga
-DOCKER_BASE_NAME=resin/rpi-raspbian
-DOCKER_BASE_VERSION=stretch
+DOCKER     := /bin/docker
+IMAGE_NAME := acch/rpi-icinga
+IMAGE_TAG  := latest
 
-default: build
+BUILDFLAGS := --no-cache --pull
+
+default: build test
 
 build:
-	$(DOCKER) pull $(DOCKER_BASE_NAME):$(DOCKER_BASE_VERSION) 
-	$(DOCKER) build --no-cache -t $(DOCKER_IMAGE_NAME) .
+	$(DOCKER) build $(BUILDFLAGS) -t $(IMAGE_NAME):$(IMAGE_TAG) .
+
+test:
+	$(DOCKER) run --rm $(IMAGE_NAME):$(IMAGE_TAG) --version
 
 push:
 	$(DOCKER) login
-	$(DOCKER) push $(DOCKER_IMAGE_NAME)
-
-test:
-	$(DOCKER) run --rm $(DOCKER_IMAGE_NAME) --version
-
-clean:
-	$(DOCKER) images -qf dangling=true | xargs --no-run-if-empty $(DOCKER) rmi
-	$(DOCKER) volume ls -qf dangling=true | xargs --no-run-if-empty $(DOCKER) volume rm
+	$(DOCKER) push $(IMAGE_NAME):$(IMAGE_TAG)
