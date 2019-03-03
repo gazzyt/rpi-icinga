@@ -6,39 +6,38 @@ Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image
 
 ## Usage
 
-Run manually with plain docker:
+Run with plain [Docker](https://docs.docker.com/engine/reference/run):
 
 ```
 # docker run --rm \
+  --name icinga
   -p 80:80 \
   -v $(pwd)/etc:/etc/icinga \
-  -v cache:/var/cache/icinga \
+  -v icinga_cache:/var/cache/icinga \
   -v $(pwd)/log:/var/log \
-  --name icinga
   acch/rpi-icinga
 ```
 
-Run with docker-compose:
+Run with [Docker-Compose](https://docs.docker.com/compose/compose-file):
 
 ```
-# docker-compose.yml
-  version: '3'
+version: '3'
 
-  services:
-    app:
-      image: acch/rpi-icinga
-      container_name: icinga
-      ports:
-        - "80:80"
-      volumes:
-        - cache:/var/cache/icinga
-        - ./etc:/etc/icinga
-        - ./log:/var/log
-      restart: always
+services:
+  app:
+    image: acch/rpi-icinga
+    container_name: icinga
+    ports:
+      - "80:80"
+    volumes:
+      - ./etc:/etc/icinga
+      - cache:/var/cache/icinga
+      - ./log:/var/log
+    restart: always
 
-  volumes:
-    cache:
-      driver: local
+volumes:
+  cache:
+    driver: local
 ```
 
 ## Volumes
