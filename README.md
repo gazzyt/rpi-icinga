@@ -50,9 +50,17 @@ This image exposes the following volumes:
 /var/log                      Icinga & Apache log files
 ```
 
-## Installation
+## Getting Started
 
-Icinga does not set any default password for the admin user. Run the following command to define a password for the admin user:
+Icinga configuration is stored in `/etc/icinga`, which is mounted as a volume to this image. When starting a container from this image for the first time it is necessary to initialize the volume with a default configuration. Run the following commands to copy the default configuration from a temporary container &mdash; the resulting `etc` directory can then be mounted to `/etc/icinga` as shown before:
+
+```
+id=$(docker create acch/rpi-icinga)
+docker cp $id:/etc/icinga etc
+docker rm -v $id
+```
+
+Icinga does not set any default password for the admin user. Run the following command to define such password:
 
 ```
 # docker exec -it icinga htpasswd -c /etc/icinga/htpasswd.users icingaadmin
