@@ -52,7 +52,7 @@ This image exposes the following volumes:
 
 ## Getting Started
 
-Icinga configuration is stored in `/etc/icinga`, which is mounted as a volume to this image. When starting a container from this image for the first time it is necessary to initialize the volume with a default configuration. Run the following commands to copy the default configuration from a temporary container &mdash; the resulting `etc` directory can then be mounted to `/etc/icinga` as shown before:
+Icinga configuration is stored in `/etc/icinga`, which is mounted as a volume to this image. When starting a container from this image for the first time it is necessary to initialize the volume with a default configuration. Run the following commands to copy the default configuration from a temporary container &mdash; the resulting `etc` directory can then be mounted as a volume to `/etc/icinga` as shown before:
 
 ```
 id=$(docker create acch/rpi-icinga)
