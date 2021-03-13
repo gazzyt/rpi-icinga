@@ -1,10 +1,9 @@
 FROM resin/rpi-raspbian:stretch
-MAINTAINER Achim Christ
 
 # Install prerequisites
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get -qq update \
-&& apt-get -qqy install \
+&& apt-get -qqy --no-install-recommends install \
   apache2 \
   icinga \
   icinga-doc \
