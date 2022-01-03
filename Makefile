@@ -1,5 +1,5 @@
 DOCKER     := /bin/docker
-IMAGE_NAME := acch/rpi-icinga
+IMAGE_NAME := gazzyt/rpi-icinga
 IMAGE_TAG  := latest
 
 BUILDFLAGS := --no-cache --pull
