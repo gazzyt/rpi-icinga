@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian:stretch
+FROM balenalib/raspberry-pi2-debian:buster
 
 # Install prerequisites
 ARG DEBIAN_FRONTEND=noninteractive
