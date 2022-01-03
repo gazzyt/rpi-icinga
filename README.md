@@ -5,9 +5,17 @@
   <br>
 </div>
 
-[![GitHub Issues](https://img.shields.io/github/issues/acch/rpi-icinga.svg)](https://github.com/acch/rpi-icinga/issues) [![GitHub Stars](https://img.shields.io/github/stars/acch/rpi-icinga.svg?label=github%20%E2%98%85)](https://github.com/acch/rpi-icinga/) [![Docker Pulls](https://img.shields.io/docker/pulls/acch/rpi-icinga.svg)](https://hub.docker.com/r/acch/rpi-icinga/) [![License](https://img.shields.io/github/license/acch/rpi-icinga.svg)](LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/gazzyt/rpi-icinga.svg)](https://github.com/gazzyt/rpi-icinga/issues) [![GitHub Stars](https://img.shields.io/github/stars/gazzyt/rpi-icinga.svg?label=github%20%E2%98%85)](https://github.com/gazzyt/rpi-icinga/) [![Docker Pulls](https://img.shields.io/docker/pulls/gazzyt/rpi-icinga.svg)](https://hub.docker.com/r/gazzyt/rpi-icinga/) [![License](https://img.shields.io/github/license/gazzyt/rpi-icinga.svg)](LICENSE)
 
 Raspberry Pi-compatible [Icinga](http://docs.icinga.com/latest/en/) Docker image. Includes [SSMTP](https://linux.die.net/man/8/ssmtp) for Email notifications.
+
+This is a fork of [acch/rpi-icinga](https://github.com/acch/rpi-icinga) updated to Debian Buster. This fixes the issue of check_nrpe failing against hosts running Debian Bullseye.
+
+## Building
+
+I didn't use the Makefile from the original project but build under WSL2 via:
+
+    ❯ docker buildx build --platform linux/arm/v7 -t gazzyt/rpi-icinga:latest .
 
 ## Usage
 
@@ -19,7 +27,7 @@ Run with plain [Docker](https://docs.docker.com/engine/reference/run):
       -v $(pwd)/etc:/etc/icinga \
       -v icinga_cache:/var/cache/icinga \
       -v $(pwd)/log:/var/log \
-      acch/rpi-icinga
+      gazzyt/rpi-icinga
 
 Run with [Docker-Compose](https://docs.docker.com/compose/compose-file):
 
@@ -27,7 +35,7 @@ Run with [Docker-Compose](https://docs.docker.com/compose/compose-file):
 
     services:
       app:
-        image: acch/rpi-icinga
+        image: gazzyt/rpi-icinga
         container_name: icinga
         ports:
           - "80:80"
