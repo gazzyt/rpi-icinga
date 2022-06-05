@@ -15,7 +15,14 @@ This is a fork of [acch/rpi-icinga](https://github.com/acch/rpi-icinga) updated 
 
 I didn't use the Makefile from the original project but build under WSL2 via:
 
-    ❯ docker buildx build --platform linux/arm/v7 -t gazzyt/rpi-icinga:latest .
+    ❯ docker buildx build --platform=linux/arm/v7,linux/arm64/v8 -t gazzyt/rpi-icinga:v2 --push .
+
+To set this up first time:
+
+    > docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+    > docker buildx create --platform linux/amd64,linux/386,linux/arm/v7,linux/arm64/v8 --name pi_builder
+    > docker buildx use pi_builder
+
 
 ## Usage
 

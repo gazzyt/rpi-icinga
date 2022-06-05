@@ -1,4 +1,10 @@
-FROM balenalib/raspberry-pi2-debian:buster
+FROM balenalib/raspberry-pi2-debian:buster as target-arm
+FROM balenalib/raspberrypi3-64-debian:buster as target-arm64
+
+FROM target-$TARGETARCH
+
+ARG TARGETARCH
+RUN echo "Arch = $TARGETARCH"
 
 # Install prerequisites
 ARG DEBIAN_FRONTEND=noninteractive
@@ -8,7 +14,6 @@ RUN apt-get -qq update \
   icinga \
   icinga-doc \
   nagios-nrpe-plugin \
-  ssmtp \
   supervisor \
 && rm -rf /var/lib/apt/lists/*
 
@@ -18,20 +23,11 @@ COPY raspberry/ /usr/share/icinga/htdocs/images/logos/raspberry/
 # Add Supervisor configuration
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Secure SSMTP configuration
-RUN mv /etc/ssmtp/ssmtp.conf /etc/icinga/ \
-&& ln -snf /etc/icinga/ssmtp.conf /etc/ssmtp/ \
-&& groupadd ssmtp \
-&& chown :ssmtp /etc/icinga/ssmtp.conf \
-&& chown :ssmtp /usr/sbin/ssmtp \
-&& chmod 640 /etc/icinga/ssmtp.conf \
-&& chmod g+s /usr/sbin/ssmtp
-
 # Fix external commands
 RUN chmod 2770 /var/lib/icinga/rw
 
 # Timezone configuration
-ARG TZ=Europe/Berlin
+ARG TZ=Europe/London
 ENV TZ=${TZ}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
 && echo $TZ > /etc/timezone
